@@ -7,10 +7,9 @@ public:
             in[road[1]]++;
         }
         sort(in.begin(), in.end(), greater<int>());
-        long long curr = n;
-        long long ans = 0;
-        for(int i = 0; i < n; ++i){
-            ans += in[i]*(curr--);
+        long long curr = n, ans = 0;
+        for(int i = 0; i < n && curr; ++i, curr--){
+            ans += in[i]*curr;
         }
         return ans;
     }
