@@ -4,22 +4,28 @@ class Solution {
 public:
     int minimumObstacles(vector<vector<int>>& grid) {
         int n = grid.size(), m = grid[0].size();
-        vector<vector<int>> dis(n, vector<int>(m, INT_MAX));
-        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> pq;
-        pq.push({0, {0, 0}});
+        vector<vector<int>> dis(n, vector<int>(m, -1));
+        
+        deque<pair<int, pair<int, int>>> dq;
+        dq.push_front({0, {0, 0}});
         dis[0][0] = 0;
-        while(!pq.empty()){
-            auto curr = pq.top();
-            pq.pop();
+        while(!dq.empty()){
+            auto curr = dq.front();
+            dq.pop_front();
+            if(curr.second.first == n - 1 && curr.second.second == m - 1){
+                return curr.first;
+            }
             for(int i = 0; i < 4; ++i){
                 int r = curr.second.first + dx[i];
                 int c = curr.second.second + dy[i];
-                if(r < 0 || r >= n || c < 0 || c >= m){
+                if(r < 0 || r >= n || c < 0 || c >= m || dis[r][c] != -1){
                     continue;
                 }
-                if(dis[r][c] > dis[curr.second.first][curr.second.second] + grid[r][c]){
-                    dis[r][c] = dis[curr.second.first][curr.second.second]+ grid[r][c];
-                    pq.push({dis[r][c], {r, c}});
+                dis[r][c] = dis[curr.second.first][curr.second.second] + (grid[r][c] == 1);
+                if(grid[r][c] == 1){
+                    dq.push_back({dis[r][c] ,{r, c}});
+                }else{
+                    dq.push_front({dis[r][c] ,{r, c}});
                 }
             }
         }
