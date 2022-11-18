@@ -14,9 +14,7 @@ public:
                 break;
             }
         }
-        if(s1 != sum/3){
-            return false;
-        }
+        
         for(int i = 0; i < arr.size() && ((arr.size() - i - 1) - i1 > 1); ++i){
             s2 += arr[arr.size() - i - 1];
             if(s2 == sum/3){
