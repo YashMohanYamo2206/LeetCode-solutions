@@ -15,7 +15,9 @@ public:
                 break;
             }
         }
-        // if()
+        if(s1 != p){
+            return false;
+        }
         for(int i = 0; i < arr.size() && ((n - i - 1) - i1 > 1); ++i){
             s2 += arr[n - i - 1];
             if(s2 == p){
