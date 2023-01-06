@@ -4,7 +4,7 @@ public:
         if(t.size() > s.size()){
             return "";
         }
-        vector<int> freq_s(256,0), freq_t(256,0);
+        vector<int> freq_s(256,0), freq_t(256,0); // can improve this. We only need to store 52 characters frequency. 
         int total_unique_t = 0, total_unique_s = 0;
         for(auto &c:t){
             freq_t[c]++;
@@ -12,7 +12,6 @@ public:
                 total_unique_t++;
             }
         }
-        // cout<<total_unique_t<<endl;
         int l = 0, L = -1, min_len = INT_MAX;
         for(int r = 0; r < s.size(); ++r){
             freq_s[s[r]]++;
@@ -20,7 +19,7 @@ public:
                 total_unique_s++;
             }
             if(total_unique_s == total_unique_t){
-                while(freq_s[s[l]] > freq_t[s[l]]){ // keep removing s[l] till we can remove it without losing the character
+                while(freq_s[s[l]] > freq_t[s[l]]){ // keep removing s[l] till we can remove it such that from the remaining frequency of s[l] character string t can still be formed. 
                     freq_s[s[l]]--;
                     l++;
                 }
