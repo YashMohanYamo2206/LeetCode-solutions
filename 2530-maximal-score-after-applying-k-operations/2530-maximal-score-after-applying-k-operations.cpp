@@ -2,15 +2,15 @@ class Solution {
 public:
     long long maxKelements(vector<int>& nums, int k) {
         long long ans = 0;
-        priority_queue<int> pq;
+        multiset<int, greater<int>> pq;
         for(auto i : nums){
-            pq.push(i);
+            pq.insert(i);
         }
         while(!pq.empty() && k){
-            int curr = pq.top();
+            int curr = *pq.begin();
             ans += curr;
-            pq.pop();
-            pq.push((curr + 2)/3);
+            pq.erase(pq.begin());
+            pq.insert((curr + 2)/3);
             --k;
         }
         return ans;
