@@ -6,13 +6,7 @@ class Solution {
             ans.push_back(nums);
             return;
         }
-        if(curr == 10){
-            return;
-        }
-        if(k == 0){
-            return;
-        }
-        if(sum >= n){
+        if(curr == 10 || k == 0 || sum >= n){
             return;
         }
         f(curr + 1, k, nums, sum);
